@@ -15,7 +15,6 @@ var ActDag = function (config) {
       top: 40,
       bottom: 40
   };
-  var getBackNumber = config.getBackNumber || 10;
 
   var flowData = config.data;
 
@@ -24,9 +23,6 @@ var ActDag = function (config) {
   var instance; // jsplumb instance
   var prefix;
   var windows = [];
-  var store = getStore();
-  var rendering = false;
-  var recovering = false;
 
   // config function
   // set draw content
@@ -53,6 +49,9 @@ var ActDag = function (config) {
   var linkAddFailCallback = config.linkAddedFailCallback || function (info) {
     console.log('Fail to add link. ' + JSON.stringify(info));
   };
+  var linkRightClickCallback = config.linkRightClickCallback || function (info) {
+    console.log('right link. ' + JSON.stringify(info));
+  };
 
   // setSource
   var setSource = this.setSource = function (data, withoutLocation) {
@@ -61,9 +60,6 @@ var ActDag = function (config) {
     processData(flowData);
     if (withoutLocation) {
       layout(flowData);
-    }
-    if (!recovering) {
-      store.init();
     }
   };
 
@@ -141,7 +137,6 @@ var ActDag = function (config) {
       alert('数据中有循环');
       return;
     }
-    rendering = true;
 
     // setup some defaults for jsPlumb.
     instance = jsPlumb.getInstance({
@@ -194,10 +189,6 @@ var ActDag = function (config) {
             source: conn.sourceId.split(prefix)[1],
             target: conn.targetId.split(prefix)[1]
           });
-          //recover model
-          if (!rendering) {
-            store.save();
-          }
         }
       }
     });
@@ -214,10 +205,17 @@ var ActDag = function (config) {
           source: conn.sourceId.split(prefix)[1],
           target: conn.targetId.split(prefix)[1]
         });
-        //recover model
-        if (!rendering) {
-          store.save();
-        }
+      }
+    });
+
+    instance.bind("contextmenu", function(component, originalEvent) {
+      if (component.sourceId && component.targetId) {
+        //link right click callback
+        linkRightClickCallback({
+          source: component.sourceId.split(prefix)[1],
+          target: component.targetId.split(prefix)[1],
+          event: originalEvent
+        });
       }
     });
 
@@ -233,7 +231,6 @@ var ActDag = function (config) {
         $(ui.helper[0]).css('top', 0);
       }
     } );
-    rendering = false;
   };
 
   // some useful function
@@ -312,6 +309,7 @@ var ActDag = function (config) {
           strokeStyle: '#000' //"#5b9ada"
       },
       connectorHoverStyle: {
+          lineWidth: 3,
           strokeStyle: '#3cf' //"#5b9ada"
       }
     });
@@ -321,10 +319,6 @@ var ActDag = function (config) {
       detachable: true
     });
     nodeAddedCallback({id: d.id, name: d.name});
-    //recover model
-    if (!rendering) {
-      store.save();
-    }
   };
 
   var deleteNode = this.deleteNode = function (node) {
@@ -337,10 +331,6 @@ var ActDag = function (config) {
     nodeHash[id] = null;
     $('#' + id).remove();
     nodeDeletedCallback({id: node.id, name: node.name});
-    //recover model
-    if (!rendering) {
-      store.save();
-    }
   };
 
   var addLinks = this.addLinks = function (links) {
@@ -358,37 +348,13 @@ var ActDag = function (config) {
   };
 
   var deleteLink = this.deleteLink = function (link) {
-
-  };
-
-  this.getBack = function () {
-    var that = this;
-    recovering = true;
-    if (store.canGetBack()) {
-      store.getBack();
-      that.setSource(store.load());
-      that.render();
+    var conn = instance.getConnections({
+                  source: prefix + link.source,
+                  target: prefix + link.target
+                });
+    if (conn[0]) {
+      instance.detach(conn[0]);
     }
-    recovering = false;
-    return {
-      canGetBack: that.canGetBack(),
-      canGetForward: that.canGetForward()
-    };
-  };
-
-  this.getForward = function () {
-    var that = this;
-    recovering = true;
-    if (store.canGetForward()) {
-      store.getForward();
-      that.setSource(store.load());
-      that.render();
-    }
-    recovering = false;
-    return {
-      canGetBack: that.canGetBack(),
-      canGetForward: that.canGetForward()
-    };
   };
 
   var computeNodeLinks = function (data, test) {
@@ -599,48 +565,6 @@ var ActDag = function (config) {
   }
 
 
-  /* store old layout */
-  function getStore() {
-    var top = getBackNumber; // max elements in store
-    var index = 0;  // recent index in store.
-    var head = 0; // how many useful elements in store.
-    var array = [];
-    var store = {};
-    store.array = array;
-    store.save = function () {
-      array[index] = dump();
-      index += 1;
-      if (index > top) {
-        array = array.slice(1, top);
-        index = top;
-      }
-      head = index;
-    };
-    store.load = function () {
-      return array[index - 1]; // array[-1] === undefined
-    };
-    store.getBack = function () {
-      if (store.canGetBack()) {
-        index -= 1;
-      }
-    };
-    store.getForward = function () {
-      if (store.canGetForward()) {
-        index += 1;
-      }
-    };
-    store.canGetBack = function () {
-      return index > 1;
-    };
-    store.canGetForward = function () {
-      return index < head;
-    };
-    store.init = function () {
-      index = 0;
-      head = 0;
-      array = [];
-    };
-  }
 
   /* sankey */
   function getSankey() {
