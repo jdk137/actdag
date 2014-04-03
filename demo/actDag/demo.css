@@ -1,0 +1,143 @@
+#demo {
+	margin-top:5em;
+}
+
+.w { 	
+	/*padding:16px;*/
+	position:absolute;
+	border: 1px solid black;
+	z-index:200;
+	border:1px solid black;
+	box-shadow: 2px 2px 19px #e0e0e0;
+	-o-box-shadow: 2px 2px 19px #e0e0e0;
+	-webkit-box-shadow: 2px 2px 19px #e0e0e0;
+	-moz-box-shadow: 2px 2px 19px #e0e0e0;
+	/*
+	-moz-border-radius:8px;
+	border-radius:8px;
+	border-radius:1em;
+	*/
+	opacity:0.9;
+	filter:alpha(opacity=90);
+	/*cursor:move;*/
+	background-color:white;
+	font-size:11px;
+	-webkit-transition:background-color 0.25s ease-in;
+	-moz-transition:background-color 0.25s ease-in;
+	transition:background-color 0.25s ease-in;
+}
+
+.w:hover {
+	border:2px solid #3cf;
+}
+
+.aLabel {
+	-webkit-transition:background-color 0.25s ease-in;
+	-moz-transition:background-color 0.25s ease-in;
+	transition:background-color 0.25s ease-in;
+}
+
+._jsPlumb_source_hover, ._jsPlumb_target_hover {
+	background-color:#1e8151;
+	color:white;
+}
+
+.aLabel {
+	background-color:white;
+	opacity:0.8;
+	padding:0.3em;				
+	border-radius:0.5em;
+	border:1px solid #346789;
+	cursor:pointer;
+}
+
+.ep {
+	position:absolute;
+	bottom: -11px;
+	right: 70px;
+	width:20px;
+	height:10px;
+	background-color:orange;
+	cursor:pointer;
+	box-shadow: 0px 0px 2px black;
+	-webkit-transition:-webkit-box-shadow 0.25s ease-in;
+	-moz-transition:-moz-box-shadow 0.25s ease-in;
+	transition:box-shadow 0.25s ease-in;
+}
+
+.ep:hover {
+	box-shadow: 0px 0px 6px black;
+}
+
+.statemachine-demo ._jsPlumb_endpoint {
+	z-index:100;
+}
+/*
+#opened {
+	left:10em;
+	top:5em;
+}
+
+#phone1 {
+	left:35em;
+	top:12em;
+	width:7em;
+}
+#inperson {
+	left:12em;
+	top:23em;
+}
+#phone2 {
+	left:28em;
+	top:24em;
+}
+#rejected {
+	left:10em;
+	top:35em;
+}*/
+.dragHover { border:2px solid orange; }
+
+path { cursor:pointer; }
+
+/* end point */
+path, ._jsPlumb_endpoint {
+	cursor: move;
+}
+
+
+
+
+
+.node-content {
+width: 100%;
+height: 24px;
+overflow: hidden;
+color: white;
+text-align: left;
+}
+.node-icon {
+float: left;
+font-size: 12px;
+background-image: url("./img/success.png");
+width: 28px;
+height: 100%;
+background-position: 50% 50%;
+background-repeat: no-repeat;
+}
+.node-name {
+height: 100%;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+padding-right: 10px;
+font-size: 14px;
+padding-left: 5px;
+}
+.node-bar {
+font-size: 12px;
+height: 16px;
+padding-left: 5px;
+background-color: rgba(0, 0, 0, 0.2);
+color: white;
+text-align: left;
+}

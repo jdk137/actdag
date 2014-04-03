@@ -1,0 +1,13 @@
+{"nodes":[
+	{"id":"opened","name":"opened","testAttr":"test"},
+	{"id":"phone1","name":"phone1"},
+	{"id":"phone2","name":"phone2"},
+	{"id":"inperson","name":"inperson"},
+	{"id":"rejected","name":"rejected"}
+],
+"links":[
+	{"source":"opened","target":"phone1"},
+	{"source":"phone1","target":"inperson"},
+	{"source":"phone1","target":"phone2"},
+	{"source":"phone2","target":"rejected"}
+]}

@@ -1,0 +1,12 @@
+{"nodes":[
+	{"id":"opened","name":"opened","loc":{"left":"120","top":"60"}},
+	{"id":"phone1","name":"phone1","loc":{"left":"420","top":"144"}},
+	{"id":"phone2","name":"phone2","loc":{"left":"336","top":"288"}},
+	{"id":"inperson","name":"inperson","loc":{"left":"144","top":"276"}},
+	{"id":"rejected","name":"rejected","loc":{"left":"120","top":"420"}}
+],
+"links":[
+	{"source":"opened","target":"phone1"},
+	{"source":"phone1","target":"inperson"},
+	{"source":"phone1","target":"phone2"}
+]}
