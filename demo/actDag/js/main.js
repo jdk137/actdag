@@ -81,7 +81,17 @@ d3.json("exampleStateMachine.json", function(fData) {
     } else if (data.message === 'looped') {
       alert('存在循环，不能保存');
     } else if (data.message === 'ok') {
-      alert('可以保存。' + JSON.stringify(data));
+      var saveData = {
+        links: data.data.links
+      };
+      saveData.nodes = data.data.nodes.map(function (d) {
+        return {
+          id: d.id,
+          name: d.name,
+          loc: d.loc
+        };
+      });
+      alert('可以保存。' + JSON.stringify(saveData));
     }
   });
   $('#dump').click(function () {
