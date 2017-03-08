@@ -9,41 +9,41 @@ You can diy any style and interactive callback as you wish.
 
 There are 4 online demos:
 
-[basic](https://cdn.rawgit.com/jdk137/actdag/master/demo/actDag/index.html) basic usage example.
+- [basic](https://cdn.rawgit.com/jdk137/actdag/master/demo/actDag/index.html) basic usage example.
 
-[multi](https://cdn.rawgit.com/jdk137/actdag/master/demo/actDag/multiInstance.html) no conflict with multiComponent in one page.
+- [multi](https://cdn.rawgit.com/jdk137/actdag/master/demo/actDag/multiInstance.html) no conflict with multiComponent in one page.
 
-[recover](https://cdn.rawgit.com/jdk137/actdag/master/demo/actDag/recovering.html) backward and forward of previous actions.
+- [recover](https://cdn.rawgit.com/jdk137/actdag/master/demo/actDag/recovering.html) backward and forward of previous actions.
 
-[no loc](https://cdn.rawgit.com/jdk137/actdag/master/demo/actDag/index.html) show how to layout nodes and links automatically.
+- [no loc](https://cdn.rawgit.com/jdk137/actdag/master/demo/actDag/index.html) show how to layout nodes and links automatically.
 
 the component provide these APIs:
 
-drawNode,
-
-addLink, deleteLink, addLinks, getLinks,
-
-addNode, deleteNode, deleteNode, getNodes,
-
-setSource,
-
-getSaveData;
+>drawNode,
+>
+>addLink, deleteLink, addLinks, getLinks,
+>
+>addNode, deleteNode, deleteNode, getNodes,
+>
+>setSource,
+>
+>getSaveData;
 
 and these callbacks:
 
-nodeAddedCallback
-
-nodeDeletedCallback
-
-nodeAddFailCallback
-
-linkAddedCallback
-
-linkDeletedCallback
-
-linkAddFailCallback
-
-linkRightClickCallback
+>nodeAddedCallback,
+>
+>nodeDeletedCallback,
+>
+>nodeAddFailCallback,
+>
+>linkAddedCallback,
+>
+>linkDeletedCallback,
+>
+>linkAddFailCallback,
+>
+>linkRightClickCallback;
 
 
 the data structure with loc
