@@ -18,20 +18,33 @@ There are 4 online demos:
 [no loc](https://cdn.rawgit.com/jdk137/actdag/master/demo/actDag/index.html) show how to layout nodes and links automatically.
 
 the component provide these APIs:
+
 drawNode,
+
 addLink, deleteLink, addLinks, getLinks,
+
 addNode, deleteNode, deleteNode, getNodes,
+
 setSource,
+
 getSaveData;
 
 and these callbacks:
+
 nodeAddedCallback
+
 nodeDeletedCallback
+
 nodeAddFailCallback
+
 linkAddedCallback
+
 linkDeletedCallback
+
 linkAddFailCallback
+
 linkRightClickCallback
+
 
 the data structure with loc
 ```
