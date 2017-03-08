@@ -8,9 +8,13 @@ You can diy any style and interactive callback as you wish.
 ![example image](https://raw.githubusercontent.com/jdk137/actdag/master/actDag.png)
 
 There are 4 online demos:
+
 [basic](https://cdn.rawgit.com/jdk137/actdag/master/demo/actDag/index.html) basic usage example.
+
 [multi](https://cdn.rawgit.com/jdk137/actdag/master/demo/actDag/multiInstance.html) no conflict with multiComponent in one page.
+
 [recover](https://cdn.rawgit.com/jdk137/actdag/master/demo/actDag/recovering.html) backward and forward of previous actions.
+
 [no loc](https://cdn.rawgit.com/jdk137/actdag/master/demo/actDag/index.html) show how to layout nodes and links automatically.
 
 the component provide these APIs:
